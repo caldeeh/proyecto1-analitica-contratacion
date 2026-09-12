@@ -14,6 +14,42 @@ df = pd.read_csv(
 
 
 # ============================================================
+# CARGAR LAS COLUMNAS DE LA TABLA DE CONTRATOS
+# ============================================================
+
+columnas_tabla = [
+    {"name": "ID contrato", "id": "id_contrato"},
+    {"name": "Proveedor", "id": "proveedor_adjudicado"},
+    {"name": "Estado", "id": "estado_contrato"},
+    {"name": "Tipo", "id": "tipo_de_contrato"},
+    {"name": "Modalidad", "id": "modalidad_de_contratacion"},
+    {"name": "Valor contrato", "id": "valor_del_contrato"},
+    {"name": "% ejecución", "id": "porcentaje_ejecutado"},
+    {"name": "% pago", "id": "porcentaje_pagado"},
+    {"name": "Pendiente ejecución", "id": "valor_pendiente_de_ejecucion"},
+    {"name": "Pendiente pago", "id": "valor_pendiente_de_pago"},
+    {"name": "Días adicionados", "id": "dias_adicionados"},
+    {"name": "Prioritario", "id": "contrato_prioritario"},
+]
+
+datos_tabla = df[
+    [
+        "id_contrato",
+        "proveedor_adjudicado",
+        "estado_contrato",
+        "tipo_de_contrato",
+        "modalidad_de_contratacion",
+        "valor_del_contrato",
+        "porcentaje_ejecutado",
+        "porcentaje_pagado",
+        "valor_pendiente_de_ejecucion",
+        "valor_pendiente_de_pago",
+        "dias_adicionados",
+        "contrato_prioritario",
+    ]
+].to_dict("records")
+
+# ============================================================
 # 2. APLICACIÓN DASH
 # ============================================================
 
@@ -387,6 +423,22 @@ app.layout = html.Div(
                 dcc.Graph(
                     id="grafico_prioritarios_modalidad"
                 ),
+
+                html.H3("Detalle de contratos"),
+
+                    html.P(
+                        "Detalle de los contratos que cumplen con los filtros seleccionados."
+                    ),
+
+                    dash_table.DataTable(
+                        id="tabla_contratos",
+                        columns=columnas_tabla,
+                        data=datos_tabla,
+                        page_size=15,
+                        sort_action="native",
+                        filter_action="native",
+                        style_table={"overflowX": "auto"},
+                    ),
             ],
             style={
                 "marginTop": "30px",
@@ -1514,6 +1566,97 @@ def actualizar_grafico_prioritarios_modalidad(
     )
 
     return figura
+
+# =================================================================
+# CALLBACK 13 — ACTUALIZACIÓN DINÁMICA DE LA TABLA DE CONTRATOS
+# =================================================================
+
+@app.callback(
+    Output("tabla_contratos", "data"),
+    Input("filtro_estado", "value"),
+    Input("filtro_tipo", "value"),
+    Input("filtro_modalidad", "value"),
+    Input("filtro_extension", "value"),
+    Input("filtro_ejecucion", "value"),
+)
+def actualizar_tabla(
+    estado,
+    tipo,
+    modalidad,
+    extension,
+    nivel_ejecucion,
+):
+
+    df_filtrado = df.copy()
+
+    # Filtro por estado
+    if estado:
+        df_filtrado = df_filtrado[
+            df_filtrado["estado_contrato"] == estado
+        ]
+
+    # Filtro por tipo
+    if tipo:
+        df_filtrado = df_filtrado[
+            df_filtrado["tipo_de_contrato"] == tipo
+        ]
+
+    # Filtro por modalidad
+    if modalidad:
+        df_filtrado = df_filtrado[
+            df_filtrado["modalidad_de_contratacion"] == modalidad
+        ]
+
+    # Filtro por extensión
+    if extension == "Sí":
+        df_filtrado = df_filtrado[
+            df_filtrado["tiene_extension"] == "Sí"
+        ]
+    elif extension == "No":
+        df_filtrado = df_filtrado[
+            df_filtrado["tiene_extension"] == "No"
+        ]
+
+    # Filtro por nivel de ejecución
+    if nivel_ejecucion and nivel_ejecucion != "Todos":
+
+        def clasificar_ejecucion(valor):
+            if pd.isna(valor):
+                return "Sin dato"
+            elif valor == 0:
+                return "0 %"
+            elif valor < 50:
+                return "1 %-49 %"
+            elif valor < 100:
+                return "50 %-99 %"
+            else:
+                return "≥100 %"
+
+        nivel = df_filtrado["porcentaje_ejecutado"].apply(
+            clasificar_ejecucion
+        )
+
+        df_filtrado = df_filtrado[
+            nivel == nivel_ejecucion
+        ]
+
+    # Columnas que se mostrarán en la tabla
+    columnas = [
+        "id_contrato",
+        "proveedor_adjudicado",
+        "estado_contrato",
+        "tipo_de_contrato",
+        "modalidad_de_contratacion",
+        "valor_del_contrato",
+        "porcentaje_ejecutado",
+        "porcentaje_pagado",
+        "valor_pendiente_de_ejecucion",
+        "valor_pendiente_de_pago",
+        "dias_adicionados",
+        "contrato_prioritario",
+    ]
+
+    return df_filtrado[columnas].to_dict("records")
 
 # ============================================================
 # 4. EJECUCIÓN
