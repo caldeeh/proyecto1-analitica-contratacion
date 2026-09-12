@@ -438,6 +438,22 @@ app.layout = html.Div(
                         sort_action="native",
                         filter_action="native",
                         style_table={"overflowX": "auto"},
+                        style_cell={
+                            "textAlign": "left",
+                            "minWidth": "120px",
+                            "maxWidth": "250px",
+                            "whiteSpace": "normal",
+                            "height": "auto",
+                        },
+                        style_data_conditional=[
+                        {
+                            "if": {
+                                "filter_query": '{contrato_prioritario} = "Sí"',
+                                "column_id": "contrato_prioritario",
+                            },
+                            "fontWeight": "bold",
+                        },
+                    ],
                     ),
             ],
             style={
@@ -447,6 +463,29 @@ app.layout = html.Div(
 
     ]
 )
+
+# --------------------------------------------------------
+# FORMATO EJECUTIVO DE VALORES
+# --------------------------------------------------------
+
+def formato_monetario(valor):
+
+        if abs(valor) >= 1_000_000_000_000:
+            return f"$ {valor / 1_000_000_000_000:.1f} billones"
+
+        elif abs(valor) >= 1_000_000_000:
+            return f"$ {valor / 1_000_000_000:.1f} mil millones"
+
+        elif abs(valor) >= 1_000_000:
+            return f"$ {valor / 1_000_000:.1f} millones"
+
+        elif abs(valor) >= 1_000:
+            return f"$ {valor / 1_000:.1f} mil"
+
+        else:
+            return f"$ {valor:,.0f}"
+
+
 
 # ============================================================
 # 5. CALLBACK PARA ACTUALIZAR LOS KPI
@@ -575,11 +614,11 @@ def actualizar_kpi(
     contratos_texto = f"{numero_contratos:,}"
 
     ejecucion_texto = (
-        f"$ {pendiente_ejecucion:,.0f}"
+        formato_monetario(pendiente_ejecucion)
     )
 
     pago_texto = (
-        f"$ {pendiente_pago:,.0f}"
+        formato_monetario(pendiente_pago)
     )
 
     prioritarios_texto = f"{prioritarios:,}"
@@ -826,27 +865,6 @@ def actualizar_grafico_pendientes(
     # --------------------------------------------------------
 
     figura = go.Figure()
-
-    # --------------------------------------------------------
-    # FORMATO EJECUTIVO DE VALORES
-    # --------------------------------------------------------
-
-    def formato_monetario(valor):
-
-        if abs(valor) >= 1_000_000_000_000:
-            return f"$ {valor / 1_000_000_000_000:.1f} billones"
-
-        elif abs(valor) >= 1_000_000_000:
-            return f"$ {valor / 1_000_000_000:.1f} mil millones"
-
-        elif abs(valor) >= 1_000_000:
-            return f"$ {valor / 1_000_000:.1f} millones"
-
-        elif abs(valor) >= 1_000:
-            return f"$ {valor / 1_000:.1f} mil"
-
-        else:
-            return f"$ {valor:,.0f}"
 
     top10["valor_formateado"] = (
         top10["valor_pendiente_de_ejecucion"]
@@ -1656,7 +1674,39 @@ def actualizar_tabla(
         "contrato_prioritario",
     ]
 
-    return df_filtrado[columnas].to_dict("records")
+    # Formateo de valores para presentación en la tabla
+    df_tabla = df_filtrado[columnas].copy()
+
+    df_tabla["porcentaje_ejecutado"] = (
+        df_tabla["porcentaje_ejecutado"]
+        .round(1)
+        .astype(str)
+        + " %"
+    )
+
+    df_tabla["porcentaje_pagado"] = (
+        df_tabla["porcentaje_pagado"]
+        .round(1)
+        .astype(str)
+        + " %"
+    )
+
+    df_tabla["valor_del_contrato"] = (
+        df_tabla["valor_del_contrato"]
+        .apply(formato_monetario)
+    )
+
+    df_tabla["valor_pendiente_de_ejecucion"] = (
+        df_tabla["valor_pendiente_de_ejecucion"]
+        .apply(formato_monetario)
+    )
+
+    df_tabla["valor_pendiente_de_pago"] = (
+        df_tabla["valor_pendiente_de_pago"]
+        .apply(formato_monetario)
+    )
+
+    return df_tabla.to_dict("records")
 
 # ============================================================
 # 4. EJECUCIÓN
