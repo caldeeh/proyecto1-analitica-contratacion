@@ -1,0 +1,192 @@
+departamento,tipo_de_contrato,contratos,valor
+Amazonas,Consultoría,3,587781198.0
+Amazonas,Interventoría,10,7568317053.0
+Amazonas,Obra,12,61338182828.0
+Amazonas,Otro,2,701959976.0
+Amazonas,Prestación de servicios,1,39750000.0
+Antioquia,Consultoría,20,20284904774.0
+Antioquia,Interventoría,80,127489155609.37
+Antioquia,Obra,147,1501132277701.76
+Antioquia,Otro,112,895630274956.84
+Antioquia,Prestación de servicios,105,18637915892.260002
+Antioquia,Suministros,11,1326456136.99
+Arauca,Consultoría,4,2603945555.0
+Arauca,Interventoría,10,4047843433.0
+Arauca,Obra,22,53456640100.14
+Arauca,Otro,24,97055705101.0
+Atlántico,Consultoría,4,3941182127.38
+Atlántico,Interventoría,13,17968446936.0
+Atlántico,Obra,52,66331674492.94
+Atlántico,Otro,23,133864201683.0
+Atlántico,Prestación de servicios,57,3347467205.0
+Atlántico,Suministros,4,1137764049.0
+Bogotá D.C.,Consultoría,1,1547600950.0
+Bogotá D.C.,Interventoría,3,5176831874.0
+Bogotá D.C.,Obra,6,52826358872.0
+Bogotá D.C.,Otro,3,254167917.44
+Bogotá D.C.,Prestación de servicios,9,3072963610.58
+Bogotá D.C.,Suministros,1,130000000.0
+Bolívar,Arrendamiento de inmuebles,2,28744000.0
+Bolívar,Consultoría,15,8937209117.99
+Bolívar,Interventoría,40,36268362935.8
+Bolívar,Obra,87,324792174801.19
+Bolívar,Otro,93,80870581507.0
+Bolívar,Prestación de servicios,75,5926478182.69
+Bolívar,Suministros,6,556928529.5
+Boyacá,Compraventa,1,63665085.0
+Boyacá,Consultoría,31,40680056423.27
+Boyacá,Interventoría,84,89922086837.42
+Boyacá,Obra,173,572085661665.0
+Boyacá,Otro,119,421473787550.15
+Boyacá,Prestación de servicios,106,27777638839.0
+Boyacá,Suministros,7,889541749.5
+Caldas,Arrendamiento de inmuebles,16,522372531.0
+Caldas,Compraventa,1,3570000.0
+Caldas,Consultoría,9,5381213652.0
+Caldas,Interventoría,39,16069010442.0
+Caldas,Obra,73,73718206473.3
+Caldas,Otro,49,589492678934.0
+Caldas,Prestación de servicios,49,8630904235.0
+Caldas,Suministros,8,538414605.0
+Caquetá,Consultoría,17,21701004087.0
+Caquetá,Interventoría,30,10499269553.0
+Caquetá,Obra,89,112240701551.2
+Caquetá,Otro,52,14971470762.0
+Caquetá,Prestación de servicios,61,18646989075.96
+Caquetá,Suministros,22,4432609110.0
+Casanare,Consultoría,17,21074630766.0
+Casanare,Interventoría,21,6575169515.0
+Casanare,Obra,60,44461254079.5
+Casanare,Otro,24,77180560018.0
+Casanare,Prestación de servicios,93,23663027546.33
+Casanare,Suministros,4,361045784.0
+Cauca,Consultoría,33,41838460830.1
+Cauca,Interventoría,62,58070206614.86
+Cauca,Obra,122,1802029693208.82
+Cauca,Otro,118,73866460687.0
+Cauca,Prestación de servicios,123,49215699694.55
+Cauca,Suministros,7,815649858.0
+Cesar,Acuerdo Marco de Precios,1,12367342090.0
+Cesar,Consultoría,12,17021854422.0
+Cesar,Interventoría,29,18228842832.1
+Cesar,Obra,89,210045205674.66
+Cesar,Otro,48,36042134031.0
+Cesar,Prestación de servicios,85,12749913494.8
+Cesar,Suministros,2,106839300.0
+Chocó,Consultoría,19,16510857932.96
+Chocó,Interventoría,49,34347230064.85
+Chocó,Obra,78,229017785634.16
+Chocó,Otro,37,21524140775.35
+Chocó,Prestación de servicios,63,10413114617.5
+Chocó,Suministros,4,238870053.06
+Cundinamarca,Consultoría,15,13727709885.33
+Cundinamarca,Interventoría,62,20676529861.45
+Cundinamarca,Obra,142,152726512188.56
+Cundinamarca,Otro,97,80010601289.59
+Cundinamarca,Prestación de servicios,69,7221999626.0
+Cundinamarca,Suministros,2,276511492.0
+Córdoba,Consultoría,20,26238242590.0
+Córdoba,Interventoría,42,63541457279.9
+Córdoba,Obra,96,388723130095.02
+Córdoba,Otro,155,483771421339.0
+Córdoba,Prestación de servicios,84,13721043392.19
+Córdoba,Suministros,30,2937702157.87
+Guainía,Consultoría,3,2165665978.0
+Guainía,Interventoría,4,656250415.0
+Guainía,Obra,4,4041386303.0
+Guainía,Otro,2,698198338.0
+Guaviare,Consultoría,3,2013147347.0
+Guaviare,Interventoría,12,24419754849.18
+Guaviare,Obra,11,203682529684.84
+Guaviare,Otro,29,25689222277.0
+Guaviare,Suministros,2,162648879.0
+Huila,Consultoría,15,25510806996.0
+Huila,Interventoría,51,21840487608.84
+Huila,Obra,123,221040205870.45
+Huila,Otro,86,149276275179.0
+Huila,Prestación de servicios,90,16615022041.47
+Huila,Suministros,7,621002291.0
+La Guajira,Consultoría,7,7412559247.0
+La Guajira,Interventoría,25,24106129343.64
+La Guajira,Obra,36,440386678603.95
+La Guajira,Otro,68,103216091494.69
+La Guajira,Prestación de servicios,60,6657184276.33
+Magdalena,Consultoría,9,14844565393.0
+Magdalena,Interventoría,39,32593853245.57
+Magdalena,Obra,86,196630741481.66
+Magdalena,Otro,61,70032606052.35
+Magdalena,Prestación de servicios,83,7478616405.0
+Magdalena,Suministros,6,830678765.0
+Meta,Consultoría,20,25888310843.09
+Meta,Interventoría,44,38556962619.13
+Meta,Obra,94,459684021572.26996
+Meta,Otro,49,57923187758.26
+Meta,Prestación de servicios,86,15708676008.5
+Meta,Suministros,4,490971870.0
+Nariño,Consultoría,34,51679098196.0
+Nariño,Interventoría,68,108305562116.19
+Nariño,Obra,153,1744661258009.82
+Nariño,Otro,118,220243637209.0
+Nariño,Prestación de servicios,102,23541133106.0
+Nariño,Suministros,7,476479006.29
+Norte de Santander,Consultoría,19,30915956959.0
+Norte de Santander,Interventoría,60,59680328014.130005
+Norte de Santander,Obra,130,995138506491.25
+Norte de Santander,Otro,86,190767774094.13
+Norte de Santander,Prestación de servicios,83,18231797947.0
+Norte de Santander,Suministros,9,690249816.0
+Putumayo,Consultoría,18,13057074493.0
+Putumayo,Interventoría,21,12084616393.0
+Putumayo,Obra,73,1418210747438.72
+Putumayo,Otro,36,24914398535.0
+Putumayo,Prestación de servicios,51,4453348824.6
+Putumayo,Suministros,11,3599740115.0
+Quindío,Consultoría,7,6565039347.0
+Quindío,Interventoría,12,7408511459.0
+Quindío,Obra,37,269378566905.33
+Quindío,Otro,25,28017275824.0
+Quindío,Prestación de servicios,76,5456322936.99
+Quindío,Suministros,2,183926400.0
+Risaralda,Consultoría,14,15952766713.2
+Risaralda,Interventoría,25,15692550380.76
+Risaralda,Obra,49,87673072379.05
+Risaralda,Otro,26,56508941512.0
+Risaralda,Prestación de servicios,70,11024192585.0
+Risaralda,Suministros,14,1180300368.0
+San Andrés y Providencia,Consultoría,5,4962686275.0
+San Andrés y Providencia,Interventoría,3,1815258568.0
+San Andrés y Providencia,Obra,5,44576743715.34
+San Andrés y Providencia,Otro,5,69027013736.0
+San Andrés y Providencia,Prestación de servicios,1,1737256500.0
+Santander,Consultoría,23,18430594511.6
+Santander,Interventoría,48,97879005577.0
+Santander,Obra,130,384021948829.51
+Santander,Otro,87,444874070597.0
+Santander,Prestación de servicios,123,27571190986.0
+Santander,Suministros,7,557734602.0
+Sucre,Consultoría,17,15527280515.0
+Sucre,Interventoría,42,41827400246.0
+Sucre,Obra,72,74235903813.62
+Sucre,Otro,91,131865143588.0
+Sucre,Prestación de servicios,65,5047831839.0
+Sucre,Suministros,6,737008901.0
+Tolima,Consultoría,12,8796406106.0
+Tolima,Interventoría,39,25156582057.59
+Tolima,Obra,86,477904486575.42
+Tolima,Otro,113,298762160140.63
+Tolima,Prestación de servicios,66,6958426625.0
+Tolima,Suministros,18,1349537177.02
+Valle del Cauca,Consultoría,10,41460607129.24
+Valle del Cauca,Interventoría,36,16754138093.98
+Valle del Cauca,Obra,43,433000063001.28
+Valle del Cauca,Otro,36,34278731170.0
+Valle del Cauca,Prestación de servicios,47,1901337242.0
+Vaupés,Consultoría,4,1685484322.0
+Vaupés,Interventoría,5,1539039603.0
+Vaupés,Obra,4,6488180029.0
+Vaupés,Otro,1,372788371.0
+Vichada,Consultoría,1,19192320.0
+Vichada,Interventoría,5,299651016.0
+Vichada,Obra,6,3844687556.0
+Vichada,Otro,4,889920600.0
+Vichada,Suministros,1,798983987.0
