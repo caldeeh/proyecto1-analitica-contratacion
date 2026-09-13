@@ -108,6 +108,27 @@ def main():
               .rename(columns={"departamento_inferido": "departamento"})
               .to_csv(DESTINO / salida, index=False))
 
+
+    # 6. Detalle territorial: la tabla que consume el módulo interactivo.
+    # Agrega por las dimensiones que el usuario puede filtrar, de modo que el
+    # tablero recalcule en memoria sin cargar los 25.605 registros.
+    detalle = df.groupby(
+        ["anio_firma", "trazabilidad_territorial", "departamento_inferido",
+         "tipo_de_contrato", "modalidad_de_contratacion"],
+        dropna=False,
+    ).agg(
+        contratos=("id_contrato", "size"),
+        valor=("valor_del_contrato", "sum"),
+    ).reset_index().rename(columns={
+        "anio_firma": "anio",
+        "trazabilidad_territorial": "trazabilidad",
+        "departamento_inferido": "departamento",
+        "tipo_de_contrato": "tipo",
+        "modalidad_de_contratacion": "modalidad",
+    })
+    detalle["nombre_geojson"] = detalle["departamento"].map(EQUIVALENCIA_GEOJSON)
+    detalle.to_csv(DESTINO / "territorial_detalle.csv", index=False)
+
     for archivo in sorted(DESTINO.glob("*.csv")):
         print(f"  {archivo.name:<34} {archivo.stat().st_size/1024:>7.1f} KB")
 
