@@ -129,6 +129,25 @@ app.layout = html.Div(
                     },
                 ),
 
+                html.Button(
+                    "¿Cómo usar este tablero?",
+                    id="boton_ayuda",
+                    n_clicks=0,
+                    style={
+                        "position": "absolute",
+                        "right": "400px",
+                        "top": "30px",
+                        "backgroundColor": "#2F80ED",
+                        "color": "white",
+                        "border": "none",
+                        "borderRadius": "8px",
+                        "padding": "12px 18px",
+                        "fontSize": "15px",
+                        "fontWeight": "600",
+                        "cursor": "pointer",
+                    },
+                ),
+
                 html.Img(
                     src="/assets/logo_invias.png",
                     style={
@@ -328,6 +347,72 @@ app.layout = html.Div(
             },
         ),
 
+        #=================================================
+        # BOTÓN DE USO DEL TABLERO
+        #=================================================
+
+        html.Div(
+            [
+                html.Div(
+                    [
+                        html.H3("¿Cómo usar este tablero?"),
+                        
+                        html.P(
+                            "Utilice los filtros para analizar los contratos de INVIAS "
+                            "según estado, tipo, modalidad, extensión y nivel de ejecución."
+                        ),
+
+                        html.P(
+                            "Los indicadores y gráficos se actualizan automáticamente "
+                            "de acuerdo con los filtros seleccionados."
+                        ),
+
+                        html.P(
+                            "Los contratos prioritarios corresponden a aquellos que "
+                            "presentan simultáneamente valores superiores al percentil "
+                            "90 de recursos pendientes de ejecución y días adicionados. "
+                            "Esta clasificación es una herramienta de seguimiento y "
+                            "no constituye evidencia de irregularidad."
+                        ),
+
+                        html.Button(
+                            "Cerrar",
+                            id="cerrar_ayuda",
+                            n_clicks=0,
+                            style={
+                                "backgroundColor": "#17365D",
+                                "color": "white",
+                                "border": "none",
+                                "borderRadius": "6px",
+                                "padding": "10px 20px",
+                                "cursor": "pointer",
+                            },
+                        ),
+                    ],
+                    style={
+                        "backgroundColor": "white",
+                        "padding": "30px",
+                        "borderRadius": "12px",
+                        "width": "500px",
+                        "boxShadow": "0 4px 20px rgba(0,0,0,0.25)",
+                    },
+                )
+            ],
+            id="ventana_ayuda",
+            style={
+                "display": "none",
+                "position": "fixed",
+                "top": "0",
+                "left": "0",
+                "width": "100%",
+                "height": "100%",
+                "backgroundColor": "rgba(0,0,0,0.45)",
+                "zIndex": "2000",
+                "justifyContent": "center",
+                "alignItems": "center",
+            },
+        ),
+
         # ----------------------------------------------------
         # KPI
         # ----------------------------------------------------
@@ -347,10 +432,10 @@ app.layout = html.Div(
                 html.Div(
                     [
                         html.Div(
-                            "CONTRATOS ANALIZADOS",
+                            ["📄  ","CONTRATOS ANALIZADOS"],
                             style={
                                 "fontFamily": "Arial, sans-serif",
-                                "fontSize": "12px",
+                                "fontSize": "18px",
                                 "fontWeight": "700",
                                 "letterSpacing": "0.5px",
                                 "marginBottom": "8px",
@@ -379,10 +464,10 @@ app.layout = html.Div(
                 html.Div(
                     [
                         html.Div(
-                            "PENDIENTE DE EJECUCIÓN",
+                            ["🪙  ","PENDIENTE DE EJECUCIÓN"],
                             style={
                                 "fontFamily": "Arial, sans-serif",
-                                "fontSize": "12px",
+                                "fontSize": "18px",
                                 "fontWeight": "700",
                                 "letterSpacing": "0.5px",
                                 "marginBottom": "8px",
@@ -411,10 +496,10 @@ app.layout = html.Div(
                 html.Div(
                     [
                         html.Div(
-                            "PENDIENTE DE PAGO REPORTADO",
+                            ["💳  ","PENDIENTE DE PAGO REPORTADO"],
                             style={
                                 "fontFamily": "Arial, sans-serif",
-                                "fontSize": "12px",
+                                "fontSize": "18px",
                                 "fontWeight": "700",
                                 "letterSpacing": "0.5px",
                                 "marginBottom": "8px",
@@ -443,10 +528,10 @@ app.layout = html.Div(
                 html.Div(
                     [
                         html.Div(
-                            "CONTRATOS PRIORITARIOS",
+                            ["⚠️  ","CONTRATOS PRIORITARIOS"],
                             style={
                                 "fontFamily": "Arial, sans-serif",
-                                "fontSize": "12px",
+                                "fontSize": "18px",
                                 "fontWeight": "700",
                                 "letterSpacing": "0.5px",
                                 "marginBottom": "8px",
@@ -2168,6 +2253,47 @@ def actualizar_tabla(
     # ---------------------------------------------------------
 
     return df_tabla.to_dict("records")
+
+
+# =================================================================
+# CALLBACK 14 — VENTANA DE AYUDA DEL TABLERO
+# =================================================================
+
+@app.callback(
+    Output("ventana_ayuda", "style"),
+    [
+        Input("boton_ayuda", "n_clicks"),
+        Input("cerrar_ayuda", "n_clicks"),
+    ],
+)
+def mostrar_ayuda(abrir, cerrar):
+
+    if abrir > cerrar:
+        return {
+            "display": "flex",
+            "position": "fixed",
+            "top": "0",
+            "left": "0",
+            "width": "100%",
+            "height": "100%",
+            "backgroundColor": "rgba(0,0,0,0.45)",
+            "zIndex": "2000",
+            "justifyContent": "center",
+            "alignItems": "center",
+        }
+
+    return {
+        "display": "none",
+        "position": "fixed",
+        "top": "0",
+        "left": "0",
+        "width": "100%",
+        "height": "100%",
+        "backgroundColor": "rgba(0,0,0,0.45)",
+        "zIndex": "2000",
+        "justifyContent": "center",
+        "alignItems": "center",
+    }
 
 # ============================================================
 # 4. EJECUCIÓN
