@@ -69,21 +69,85 @@ app.layout = html.Div(
 
         html.Div(
             [
-                html.H1(
-                    "INVIAS — Ejecución financiera y modificaciones contractuales"
+                html.Div(
+                    [
+                        html.H1(
+                            "INVIAS",
+                            style={
+                                "margin": "0",
+                                "fontFamily": "Arial, sans-serif",
+                                "fontSize": "30px",
+                                "fontWeight": "700",
+                                "color": "#FFFFFF",
+                            },
+                        ),
+
+                        html.Div(
+                            "Ejecución financiera y modificaciones contractuales",
+                            style={
+                                "fontFamily": "Arial, sans-serif",
+                                "fontSize": "21px",
+                                "fontWeight": "500",
+                                "color": "#FFFFFF",
+                                "marginTop": "4px",
+                            },
+                        ),
+                    ],
                 ),
 
-                html.H3(
-                    "Pregunta 3 — Ejecución financiera y modificaciones de los contratos"
+                html.Div(
+                    [
+                        html.Div(
+                            "PREGUNTA 3",
+                            style={
+                                "fontFamily": "Arial, sans-serif",
+                                "fontSize": "12px",
+                                "fontWeight": "700",
+                                "letterSpacing": "1px",
+                                "color": "#DCE8F5",
+                                "marginBottom": "6px",
+                            },
+                        ),
+
+                        html.P(
+                            "¿Cómo se comporta la ejecución financiera de los contratos de INVIAS "
+                            "y cuáles presentan mayores niveles de recursos pendientes de ejecución, "
+                            "recursos pendientes de pago o extensiones en el plazo contractual "
+                            "que puedan requerir seguimiento?",
+                            style={
+                                "margin": "0",
+                                "fontFamily": "Arial, sans-serif",
+                                "fontSize": "13px",
+                                "lineHeight": "1.5",
+                                "color": "#EAF1F8",
+                                "maxWidth": "900px",
+                            },
+                        ),
+                    ],
+                    style={
+                        "marginTop": "14px",
+                    },
                 ),
 
-                html.P(
-                    "¿Cómo se comporta la ejecución financiera de los contratos de INVIAS "
-                    "y cuáles presentan mayores niveles de recursos pendientes de ejecución, "
-                    "recursos pendientes de pago o extensiones en el plazo contractual "
-                    "que puedan requerir seguimiento?"
-                ),
-            ]
+                html.Img(
+                    src="/assets/logo_invias.png",
+                    style={
+                        "position": "absolute",
+                        "right": "30px",
+                        "top": "30px",
+                        "height": "130px",
+                        "width": "auto",
+            },
+        ),
+            ],
+            style={
+                "backgroundColor": "#17365D",
+                "padding": "24px 30px",
+                "borderRadius": "10px",
+                "marginBottom": "22px",
+                "boxShadow": "0 2px 6px rgba(0,0,0,0.08)",
+                "fontFamily": "Arial, sans-serif",
+            },
         ),
 
         # ----------------------------------------------------
@@ -92,74 +156,115 @@ app.layout = html.Div(
 
         html.Div(
             [
-                html.H2("Filtros de análisis"),
+                html.H2(
+                    "Filtros de análisis",
+                    style={
+                        "margin": "0 0 15px 0",
+                        "fontFamily": "Arial, sans-serif",
+                        "fontSize": "18px",
+                        "fontWeight": "600",
+                    },
+                ),
 
                 html.Div(
                     [
-
+                        # Filtro: Estado del contrato
                         html.Div(
                             [
-                                html.Label("Estado del contrato"),
+                                html.Label(
+                                    "Estado del contrato",
+                                    style={
+                                        "fontFamily": "Arial, sans-serif",
+                                        "fontSize": "13px",
+                                        "fontWeight": "600",
+                                        "marginBottom": "6px",
+                                        "display": "block",
+                                    },
+                                ),
                                 dcc.Dropdown(
                                     id="filtro_estado",
                                     options=[
-                                        {"label": valor, "value": valor}
-                                        for valor in sorted(
-                                            df["estado_contrato"]
-                                            .dropna()
-                                            .unique()
+                                        {"label": x, "value": x}
+                                        for x in sorted(
+                                            df["estado_contrato"].dropna().unique()
                                         )
                                     ],
                                     placeholder="Todos",
                                     clearable=True,
                                 ),
                             ],
-                            style={"width": "19%"},
+                            style={"flex": "1"},
                         ),
 
+                        # Filtro: Tipo de contrato
                         html.Div(
                             [
-                                html.Label("Tipo de contrato"),
+                                html.Label(
+                                    "Tipo de contrato",
+                                    style={
+                                        "fontFamily": "Arial, sans-serif",
+                                        "fontSize": "13px",
+                                        "fontWeight": "600",
+                                        "marginBottom": "6px",
+                                        "display": "block",
+                                    },
+                                ),
                                 dcc.Dropdown(
                                     id="filtro_tipo",
                                     options=[
-                                        {"label": valor, "value": valor}
-                                        for valor in sorted(
-                                            df["tipo_de_contrato"]
-                                            .dropna()
-                                            .unique()
+                                        {"label": x, "value": x}
+                                        for x in sorted(
+                                            df["tipo_de_contrato"].dropna().unique()
                                         )
                                     ],
                                     placeholder="Todos",
                                     clearable=True,
                                 ),
                             ],
-                            style={"width": "19%"},
+                            style={"flex": "1"},
                         ),
 
+                        # Filtro: Modalidad de contratación
                         html.Div(
                             [
-                                html.Label("Modalidad de contratación"),
+                                html.Label(
+                                    "Modalidad de contratación",
+                                    style={
+                                        "fontFamily": "Arial, sans-serif",
+                                        "fontSize": "13px",
+                                        "fontWeight": "600",
+                                        "marginBottom": "6px",
+                                        "display": "block",
+                                    },
+                                ),
                                 dcc.Dropdown(
                                     id="filtro_modalidad",
                                     options=[
-                                        {"label": valor, "value": valor}
-                                        for valor in sorted(
-                                            df["modalidad_de_contratacion"]
-                                            .dropna()
-                                            .unique()
+                                        {"label": x, "value": x}
+                                        for x in sorted(
+                                            df["modalidad_de_contratacion"].dropna().unique()
                                         )
                                     ],
                                     placeholder="Todos",
                                     clearable=True,
                                 ),
                             ],
-                            style={"width": "19%"},
+                            style={"flex": "1"},
                         ),
 
+                        # Filtro: Extensión contractual
                         html.Div(
                             [
-                                html.Label("Extensión contractual"),
+                                html.Label(
+                                    "Extensión contractual",
+                                    style={
+                                        "fontFamily": "Arial, sans-serif",
+                                        "fontSize": "13px",
+                                        "fontWeight": "600",
+                                        "marginBottom": "6px",
+                                        "display": "block",
+                                    },
+                                ),
                                 dcc.Dropdown(
                                     id="filtro_extension",
                                     options=[
@@ -167,16 +272,26 @@ app.layout = html.Div(
                                         {"label": "Con extensión", "value": "Sí"},
                                         {"label": "Sin extensión", "value": "No"},
                                     ],
-                                    value="Todos",
-                                    clearable=False,
+                                    placeholder="Todos",
+                                    clearable=True,
                                 ),
                             ],
-                            style={"width": "19%"},
+                            style={"flex": "1"},
                         ),
 
+                        # Filtro: Nivel de ejecución
                         html.Div(
                             [
-                                html.Label("Nivel de ejecución"),
+                                html.Label(
+                                    "Nivel de ejecución",
+                                    style={
+                                        "fontFamily": "Arial, sans-serif",
+                                        "fontSize": "13px",
+                                        "fontWeight": "600",
+                                        "marginBottom": "6px",
+                                        "display": "block",
+                                    },
+                                ),
                                 dcc.Dropdown(
                                     id="filtro_ejecucion",
                                     options=[
@@ -187,111 +302,180 @@ app.layout = html.Div(
                                         {"label": "≥ 100 %", "value": ">=100%"},
                                         {"label": "Sin dato", "value": "Sin dato"},
                                     ],
-                                    value="Todos",
-                                    clearable=False,
+                                    placeholder="Todos",
+                                    clearable=True,
                                 ),
                             ],
-                            style={"width": "19%"},
+                            style={"flex": "1"},
                         ),
-
                     ],
                     style={
                         "display": "flex",
-                        "justifyContent": "space-between",
-                        "gap": "10px",
+                        "gap": "12px",
+                        "flexWrap": "wrap",
                     },
                 ),
             ],
             style={
-                "padding": "20px",
-                "border": "1px solid #ddd",
-                "borderRadius": "10px",
-                "marginTop": "20px",
+                "padding": "18px 20px",
+                "backgroundColor": "#F7F9FC",
+                "border": "1px solid #D9E1EA",
+                "borderRadius": "8px",
+                "marginBottom": "25px",
+                "position": "sticky",
+                "top": "10px",
+                "zIndex": "1000",
             },
         ),
 
         # ----------------------------------------------------
         # KPI
         # ----------------------------------------------------
-
-        html.H2("Resumen de ejecución"),
+        html.H2(
+            "Resumen de ejecución",
+            style={
+                "margin": "0 0 15px 0",
+                "fontFamily": "Arial, sans-serif",
+                "fontSize": "20px",
+                "fontWeight": "600",
+            },
+        ),
 
         html.Div(
             [
-
+                # KPI 1
                 html.Div(
                     [
-                        html.H4("Contratos analizados"),
-                        html.H2(
+                        html.Div(
+                            "CONTRATOS ANALIZADOS",
+                            style={
+                                "fontFamily": "Arial, sans-serif",
+                                "fontSize": "12px",
+                                "fontWeight": "700",
+                                "letterSpacing": "0.5px",
+                                "marginBottom": "8px",
+                            },
+                        ),
+                        html.Div(
                             id="kpi_contratos",
-                            children="20,718"
+                            children="20,718",
+                            style={
+                                "fontFamily": "Arial, sans-serif",
+                                "fontSize": "28px",
+                                "fontWeight": "700",
+                            },
                         ),
                     ],
                     style={
-                        "padding": "20px",
-                        "border": "1px solid #ddd",
-                        "borderRadius": "10px",
-                        "textAlign": "center",
-                        "width": "23%",
+                        "flex": "1",
+                        "padding": "18px 20px",
+                        "border": "1px solid #D9E1EA",
+                        "borderRadius": "8px",
+                        "backgroundColor": "#FFFFFF",
                     },
                 ),
 
+                # KPI 2
                 html.Div(
                     [
-                        html.H4("Recursos pendientes de ejecución"),
-                        html.H2(
+                        html.Div(
+                            "PENDIENTE DE EJECUCIÓN",
+                            style={
+                                "fontFamily": "Arial, sans-serif",
+                                "fontSize": "12px",
+                                "fontWeight": "700",
+                                "letterSpacing": "0.5px",
+                                "marginBottom": "8px",
+                            },
+                        ),
+                        html.Div(
                             id="kpi_pendiente_ejecucion",
-                            children="$ 0",
+                            children="$ 38.1 billones",
+                            style={
+                                "fontFamily": "Arial, sans-serif",
+                                "fontSize": "28px",
+                                "fontWeight": "700",
+                            },
                         ),
                     ],
                     style={
-                        "padding": "20px",
-                        "border": "1px solid #ddd",
-                        "borderRadius": "10px",
-                        "textAlign": "center",
-                        "width": "23%",
+                        "flex": "1",
+                        "padding": "18px 20px",
+                        "border": "1px solid #D9E1EA",
+                        "borderRadius": "8px",
+                        "backgroundColor": "#FFFFFF",
                     },
                 ),
 
+                # KPI 3
                 html.Div(
                     [
-                        html.H4("Recursos pendientes de pago"),
-                        html.H2(
+                        html.Div(
+                            "PENDIENTE DE PAGO REPORTADO",
+                            style={
+                                "fontFamily": "Arial, sans-serif",
+                                "fontSize": "12px",
+                                "fontWeight": "700",
+                                "letterSpacing": "0.5px",
+                                "marginBottom": "8px",
+                            },
+                        ),
+                        html.Div(
                             id="kpi_pendiente_pago",
                             children="$ 0",
+                            style={
+                                "fontFamily": "Arial, sans-serif",
+                                "fontSize": "28px",
+                                "fontWeight": "700",
+                            },
                         ),
                     ],
                     style={
-                        "padding": "20px",
-                        "border": "1px solid #ddd",
-                        "borderRadius": "10px",
-                        "textAlign": "center",
-                        "width": "23%",
+                        "flex": "1",
+                        "padding": "18px 20px",
+                        "border": "1px solid #D9E1EA",
+                        "borderRadius": "8px",
+                        "backgroundColor": "#FFFFFF",
                     },
                 ),
 
+                # KPI 4
                 html.Div(
                     [
-                        html.H4("Contratos prioritarios"),
-                        html.H2(
+                        html.Div(
+                            "CONTRATOS PRIORITARIOS",
+                            style={
+                                "fontFamily": "Arial, sans-serif",
+                                "fontSize": "12px",
+                                "fontWeight": "700",
+                                "letterSpacing": "0.5px",
+                                "marginBottom": "8px",
+                            },
+                        ),
+                        html.Div(
                             id="kpi_prioritarios",
                             children="750",
+                            style={
+                                "fontFamily": "Arial, sans-serif",
+                                "fontSize": "28px",
+                                "fontWeight": "700",
+                            },
                         ),
                     ],
                     style={
-                        "padding": "20px",
-                        "border": "1px solid #ddd",
-                        "borderRadius": "10px",
-                        "textAlign": "center",
-                        "width": "23%",
+                        "flex": "1",
+                        "padding": "18px 20px",
+                        "border": "1px solid #D9E1EA",
+                        "borderRadius": "8px",
+                        "backgroundColor": "#FFFFFF",
                     },
                 ),
-
             ],
             style={
                 "display": "flex",
-                "justifyContent": "space-between",
                 "gap": "15px",
+                "flexWrap": "wrap",
+                "marginBottom": "25px",
             },
         ),
 
@@ -299,33 +483,60 @@ app.layout = html.Div(
         # GRÁFICO 1: DISTRIBUCIÓN DE LA EJECUCIÓN
         # ----------------------------------------------------
 
-        html.Div(
+       html.Div(
             [
-                html.H2("Comportamiento de la ejecución financiera"),
+                html.Div(
+                    [
+                        html.H2(
+                            "Comportamiento de la ejecución financiera",
+                            style={"fontSize": "18px", "margin": "0 0 10px 0"},
+                        ),
 
-                dcc.Graph(
-                    id="grafico_ejecucion"
+                        dcc.Graph(
+                            id="grafico_ejecucion"
+                        ),
+                    ],
+                    style={
+                        "width": "49%",
+                        "backgroundColor": "#FFFFFF",
+                        "border": "1px solid #E1E6ED",
+                        "borderRadius": "10px",
+                        "padding": "10px",
+                        "boxShadow": "0 1px 4px rgba(0,0,0,0.05)",
+                    },
                 ),
-            ],
-            style={
-                "marginTop": "25px",
-            },
-        ),
 
         # ----------------------------------------------------
         # GRÁFICO 2: TOP CONTRATOS POR RECURSOS PENDIENTES
         # ----------------------------------------------------
 
         html.Div(
-            [
-                html.H2("Recursos pendientes de ejecución"),
+                    [
+                        html.H2(
+                            "Recursos pendientes de ejecución",
+                            style={"fontSize": "18px", "margin": "0 0 10px 0"},
+                        ),
 
-                dcc.Graph(
-                    id="grafico_pendientes"
+                        dcc.Graph(
+                            id="grafico_pendientes"
+                        ),
+                    ],
+                    style={
+                        "width": "49%",
+                        "backgroundColor": "#FFFFFF",
+                        "border": "1px solid #E1E6ED",
+                        "borderRadius": "10px",
+                        "padding": "10px",
+                        "boxShadow": "0 1px 4px rgba(0,0,0,0.05)",
+                    },
                 ),
             ],
             style={
+                "display": "flex",
+                "justifyContent": "space-between",
+                "gap": "20px",
                 "marginTop": "25px",
+                "marginBottom": "20px",
             },
         ),
 
@@ -335,31 +546,57 @@ app.layout = html.Div(
 
         html.Div(
             [
-                html.H2("Extensiones contractuales"),
+                html.Div(
+                    [
+                        html.H2(
+                            "Extensiones contractuales",
+                            style={"fontSize": "18px", "margin": "0 0 10px 0"},
+                        ),
 
-                dcc.Graph(
-                    id="grafico_extensiones"
+                        dcc.Graph(
+                            id="grafico_extensiones"
+                        ),
+                    ],
+                    style={
+                        "width": "49%",
+                        "backgroundColor": "#FFFFFF",
+                        "border": "1px solid #E1E6ED",
+                        "borderRadius": "10px",
+                        "padding": "10px",
+                        "boxShadow": "0 1px 4px rgba(0,0,0,0.05)",
+                    },
                 ),
-            ],
-            style={
-                "marginTop": "25px",
-            },
-        ),
 
         # ----------------------------------------------------
         # GRÁFICO 4: EJECUCIÓN VS PAGO
         # ----------------------------------------------------
 
         html.Div(
-            [
-                html.H2("Ejecución financiera frente a pago"),
+                    [
+                        html.H2(
+                            "Ejecución financiera frente a pago",
+                            style={"fontSize": "18px", "margin": "0 0 10px 0"},
+                        ),
 
-                dcc.Graph(
-                    id="grafico_ejecucion_pago"
+                        dcc.Graph(
+                            id="grafico_ejecucion_pago"
+                        ),
+                    ],
+                    style={
+                        "width": "49%",
+                        "backgroundColor": "#FFFFFF",
+                        "border": "1px solid #E1E6ED",
+                        "borderRadius": "10px",
+                        "padding": "10px",
+                        "boxShadow": "0 1px 4px rgba(0,0,0,0.05)",
+                    },
                 ),
             ],
             style={
-                "marginTop": "25px",
+                "display": "flex",
+                "justifyContent": "space-between",
+                "gap": "20px",
+                "marginBottom": "20px",
             },
         ),
 
@@ -369,43 +606,64 @@ app.layout = html.Div(
 
         html.Div(
             [
-                html.H2("Contratos prioritarios para seguimiento"),
+                html.H2(
+                    "Contratos prioritarios para seguimiento",
+                    style={
+                        "fontSize": "20px",
+                        "margin": "0 0 6px 0",
+                    },
+                ),
 
                 html.P(
                     "Contratos que superan simultáneamente los percentiles "
-                    "90 de recursos pendientes de ejecución y días adicionados."
+                    "90 de recursos pendientes de ejecución y días adicionados.",
+                    style={
+                        "fontSize": "13px",
+                        "color": "#64748B",
+                        "margin": "0 0 15px 0",
+                    },
                 ),
 
                 html.Div(
                     [
                         html.Div(
                             [
-                                html.H4("Contratos prioritarios"),
+                                html.H4(
+                                    "Contratos prioritarios",
+                                    style={"margin": "0"},
+                                ),
                                 html.H2(
                                     id="total_prioritarios",
                                     children="750",
+                                    style={"margin": "5px 0 0 0"},
                                 ),
                             ],
                             style={
                                 "textAlign": "center",
-                                "padding": "20px",
-                                "border": "1px solid #ddd",
+                                "padding": "14px",
+                                "backgroundColor": "#FFFFFF",
+                                "border": "1px solid #E1E6ED",
                                 "borderRadius": "10px",
                             },
                         ),
 
                         html.Div(
                             [
-                                html.H4("Con extensión contractual"),
+                                html.H4(
+                                    "Con extensión contractual",
+                                    style={"margin": "0"},
+                                ),
                                 html.H2(
                                     id="prioritarios_extension",
                                     children="100 %",
+                                    style={"margin": "5px 0 0 0"},
                                 ),
                             ],
                             style={
                                 "textAlign": "center",
-                                "padding": "20px",
-                                "border": "1px solid #ddd",
+                                "padding": "14px",
+                                "backgroundColor": "#FFFFFF",
+                                "border": "1px solid #E1E6ED",
                                 "borderRadius": "10px",
                             },
                         ),
@@ -413,16 +671,37 @@ app.layout = html.Div(
                     style={
                         "display": "flex",
                         "gap": "20px",
+                        "marginBottom": "15px",
                     },
                 ),
 
-                dcc.Graph(
-                    id="grafico_prioritarios_tipo"
+                html.Div(
+                    [
+                        html.Div(
+                            [
+                                dcc.Graph(
+                                    id="grafico_prioritarios_tipo"
+                                )
+                            ],
+                            style={"width": "49%", "minWidth": "0"},
+                        ),
+
+                        html.Div(
+                            [
+                                dcc.Graph(
+                                    id="grafico_prioritarios_modalidad"
+                                )
+                            ],
+                            style={"width": "49%", "minWidth": "0"},
+                        ),
+                    ],
+                    style={
+                        "display": "flex",
+                        "justifyContent": "space-between",
+                        "gap": "20px",
+                    },
                 ),
 
-                dcc.Graph(
-                    id="grafico_prioritarios_modalidad"
-                ),
 
                 html.H3("Detalle de contratos"),
 
@@ -435,16 +714,82 @@ app.layout = html.Div(
                         columns=columnas_tabla,
                         data=datos_tabla,
                         page_size=15,
-                        sort_action="native",
+                        sort_action="custom",
                         filter_action="native",
-                        style_table={"overflowX": "auto"},
+                        style_table={
+                            "overflowX": "auto",
+                            "border": "1px solid #E1E6ED",
+                            "borderRadius": "8px",
+                        },
                         style_cell={
                             "textAlign": "left",
-                            "minWidth": "120px",
-                            "maxWidth": "250px",
                             "whiteSpace": "normal",
                             "height": "auto",
+                            "fontFamily": "Arial, sans-serif",
+                            "fontSize": "13px",
+                            "padding": "8px 10px",
+                            "border": "1px solid #E5E7EB",
                         },
+
+                        style_header={
+                            "backgroundColor": "#17365D",
+                            "color": "#FFFFFF",
+                            "fontWeight": "700",
+                            "textAlign": "center",
+                            "fontSize": "13px",
+                        },
+
+                        style_cell_conditional=[
+                            {
+                                "if": {"column_id": "id_contrato"},
+                                "width": "110px",
+                            },
+                            {
+                                "if": {"column_id": "proveedor_adjudicado"},
+                                "width": "220px",
+                            },
+                            {
+                                "if": {"column_id": "estado_contrato"},
+                                "width": "120px",
+                            },
+                            {
+                                "if": {"column_id": "tipo_de_contrato"},
+                                "width": "150px",
+                            },
+                            {
+                                "if": {"column_id": "modalidad_de_contratacion"},
+                                "width": "210px",
+                            },
+                            {
+                                "if": {"column_id": "valor_del_contrato"},
+                                "width": "150px",
+                            },
+                            {
+                                "if": {"column_id": "porcentaje_ejecutado"},
+                                "width": "100px",
+                            },
+                            {
+                                "if": {"column_id": "porcentaje_pagado"},
+                                "width": "100px",
+                            },
+                            {
+                                "if": {"column_id": "valor_pendiente_de_ejecucion"},
+                                "width": "160px",
+                            },
+                            {
+                                "if": {"column_id": "valor_pendiente_de_pago"},
+                                "width": "150px",
+                            },
+                            {
+                                "if": {"column_id": "dias_adicionados"},
+                                "width": "110px",
+                            },
+                            {
+                                "if": {"column_id": "contrato_prioritario"},
+                                "width": "100px",
+                            },
+                        ],
+                  
                         style_data_conditional=[
                         {
                             "if": {
@@ -453,8 +798,32 @@ app.layout = html.Div(
                             },
                             "fontWeight": "bold",
                         },
+                        {
+                            "if": {"column_id": "valor_del_contrato"},
+                            "textAlign": "right",
+                        },
+                        {
+                            "if": {"column_id": "porcentaje_ejecutado"},
+                            "textAlign": "right",
+                        },
+                        {
+                            "if": {"column_id": "porcentaje_pagado"},
+                            "textAlign": "right",
+                        },
+                        {
+                            "if": {"column_id": "valor_pendiente_de_ejecucion"},
+                            "textAlign": "right",
+                        },
+                        {
+                            "if": {"column_id": "valor_pendiente_de_pago"},
+                            "textAlign": "right",
+                        },
+                        {
+                            "if": {"column_id": "dias_adicionados"},
+                            "textAlign": "right",
+                        },
                     ],
-                    ),
+                ),
             ],
             style={
                 "marginTop": "30px",
@@ -469,23 +838,26 @@ app.layout = html.Div(
 # --------------------------------------------------------
 
 def formato_monetario(valor):
+    if pd.isna(valor):
+        return "$ 0"
 
-        if abs(valor) >= 1_000_000_000_000:
-            return f"$ {valor / 1_000_000_000_000:.1f} billones"
+    if valor >= 1_000_000_000_000_000:
+        return f"$ {valor / 1_000_000_000_000_000:,.1f} mil billones"
 
-        elif abs(valor) >= 1_000_000_000:
-            return f"$ {valor / 1_000_000_000:.1f} mil millones"
+    elif valor >= 1_000_000_000_000:
+        return f"$ {valor / 1_000_000_000_000:,.1f} billones"
 
-        elif abs(valor) >= 1_000_000:
-            return f"$ {valor / 1_000_000:.1f} millones"
+    elif valor >= 1_000_000_000:
+        return f"$ {valor / 1_000_000_000:,.1f} mil millones"
 
-        elif abs(valor) >= 1_000:
-            return f"$ {valor / 1_000:.1f} mil"
+    elif valor >= 1_000_000:
+        return f"$ {valor / 1_000_000:,.1f} millones"
 
-        else:
-            return f"$ {valor:,.0f}"
+    elif valor >= 1_000:
+        return f"$ {valor / 1_000:,.1f} mil"
 
-
+    else:
+        return f"$ {valor:,.0f}"
 
 # ============================================================
 # 5. CALLBACK PARA ACTUALIZAR LOS KPI
@@ -590,8 +962,10 @@ def actualizar_kpi(
     numero_contratos = len(df_filtrado)
 
     pendiente_ejecucion = (
-        df_filtrado["valor_pendiente_de_ejecucion"]
-        .fillna(0)
+        df_filtrado.loc[
+            df_filtrado["valor_pendiente_de_ejecucion"] > 0,
+            "valor_pendiente_de_ejecucion"
+        ]
         .sum()
     )
 
@@ -879,6 +1253,7 @@ def actualizar_grafico_pendientes(
 
             text=top10["valor_formateado"],
             textposition="outside",
+            cliponaxis=False,
 
             customdata=top10[
                 [
@@ -897,6 +1272,7 @@ def actualizar_grafico_pendientes(
     )
 
     figura.update_layout(
+        xaxis_range=[0, top10["valor_pendiente_de_ejecucion"].max() * 1.20],
         title="Top 10 contratos con mayores recursos pendientes de ejecución",
         xaxis_title="Recursos pendientes de ejecución ($)",
         yaxis_title="ID del contrato",
@@ -1576,6 +1952,7 @@ def actualizar_grafico_prioritarios_modalidad(
     )
 
     figura.update_layout(
+        xaxis_range=[0, resumen.max() * 1.20],
         title="Contratos prioritarios por modalidad de contratación",
         xaxis_title="Número de contratos",
         yaxis_title="Modalidad de contratación",
@@ -1591,11 +1968,13 @@ def actualizar_grafico_prioritarios_modalidad(
 
 @app.callback(
     Output("tabla_contratos", "data"),
+
     Input("filtro_estado", "value"),
     Input("filtro_tipo", "value"),
     Input("filtro_modalidad", "value"),
     Input("filtro_extension", "value"),
     Input("filtro_ejecucion", "value"),
+    Input("tabla_contratos", "sort_by"),
 )
 def actualizar_tabla(
     estado,
@@ -1603,93 +1982,108 @@ def actualizar_tabla(
     modalidad,
     extension,
     nivel_ejecucion,
+    sort_by,
 ):
+    # ---------------------------------------------------------
+    # 1. Aplicar los filtros seleccionados
+    # ---------------------------------------------------------
 
     df_filtrado = df.copy()
 
-    # Filtro por estado
     if estado:
         df_filtrado = df_filtrado[
             df_filtrado["estado_contrato"] == estado
         ]
 
-    # Filtro por tipo
     if tipo:
         df_filtrado = df_filtrado[
             df_filtrado["tipo_de_contrato"] == tipo
         ]
 
-    # Filtro por modalidad
     if modalidad:
         df_filtrado = df_filtrado[
             df_filtrado["modalidad_de_contratacion"] == modalidad
         ]
 
-    # Filtro por extensión
-    if extension == "Sí":
+    if extension and extension != "Todos":
         df_filtrado = df_filtrado[
-            df_filtrado["tiene_extension"] == "Sí"
-        ]
-    elif extension == "No":
-        df_filtrado = df_filtrado[
-            df_filtrado["tiene_extension"] == "No"
+            df_filtrado["tiene_extension"] == extension
         ]
 
-    # Filtro por nivel de ejecución
     if nivel_ejecucion and nivel_ejecucion != "Todos":
 
-        def clasificar_ejecucion(valor):
-            if pd.isna(valor):
-                return "Sin dato"
-            elif valor == 0:
-                return "0 %"
-            elif valor < 50:
-                return "1 %-49 %"
-            elif valor < 100:
-                return "50 %-99 %"
-            else:
-                return "≥100 %"
+        if nivel_ejecucion == "0%":
+            df_filtrado = df_filtrado[
+                df_filtrado["porcentaje_ejecutado"] == 0
+            ]
 
-        nivel = df_filtrado["porcentaje_ejecutado"].apply(
-            clasificar_ejecucion
-        )
+        elif nivel_ejecucion == "1%-49%":
+            df_filtrado = df_filtrado[
+                (df_filtrado["porcentaje_ejecutado"] > 0)
+                & (df_filtrado["porcentaje_ejecutado"] < 50)
+            ]
 
-        df_filtrado = df_filtrado[
-            nivel == nivel_ejecucion
+        elif nivel_ejecucion == "50%-99%":
+            df_filtrado = df_filtrado[
+                (df_filtrado["porcentaje_ejecutado"] >= 50)
+                & (df_filtrado["porcentaje_ejecutado"] < 100)
+            ]
+
+        elif nivel_ejecucion == ">=100%":
+            df_filtrado = df_filtrado[
+                df_filtrado["porcentaje_ejecutado"] >= 100
+            ]
+
+        elif nivel_ejecucion == "Sin dato":
+            df_filtrado = df_filtrado[
+                df_filtrado["porcentaje_ejecutado"].isna()
+            ]
+
+    # ---------------------------------------------------------
+    # 2. Ordenar NUMÉRICAMENTE antes de aplicar formatos
+    # ---------------------------------------------------------
+
+    if sort_by:
+        columnas_orden = [item["column_id"] for item in sort_by]
+        direcciones = [
+            item["direction"] == "asc"
+            for item in sort_by
         ]
 
-    # Columnas que se mostrarán en la tabla
-    columnas = [
-        "id_contrato",
-        "proveedor_adjudicado",
-        "estado_contrato",
-        "tipo_de_contrato",
-        "modalidad_de_contratacion",
-        "valor_del_contrato",
-        "porcentaje_ejecutado",
-        "porcentaje_pagado",
-        "valor_pendiente_de_ejecucion",
-        "valor_pendiente_de_pago",
-        "dias_adicionados",
-        "contrato_prioritario",
-    ]
+        df_filtrado = df_filtrado.sort_values(
+            by=columnas_orden,
+            ascending=direcciones,
+            na_position="last",
+            kind="mergesort",
+        )
 
-    # Formateo de valores para presentación en la tabla
-    df_tabla = df_filtrado[columnas].copy()
+    # ---------------------------------------------------------
+    # 3. Seleccionar columnas para la tabla
+    # ---------------------------------------------------------
+
+    df_tabla = df_filtrado[
+        [columna["id"] for columna in columnas_tabla]
+    ].copy()
+
+    # ---------------------------------------------------------
+    # 4. Formatear porcentajes SOLO para presentación
+    # ---------------------------------------------------------
 
     df_tabla["porcentaje_ejecutado"] = (
         df_tabla["porcentaje_ejecutado"]
         .round(1)
-        .astype(str)
-        + " %"
+        .map(lambda x: f"{x:.1f} %" if pd.notna(x) else "")
     )
 
     df_tabla["porcentaje_pagado"] = (
         df_tabla["porcentaje_pagado"]
         .round(1)
-        .astype(str)
-        + " %"
+        .map(lambda x: f"{x:.1f} %" if pd.notna(x) else "")
     )
+
+    # ---------------------------------------------------------
+    # 5. Formatear valores monetarios SOLO para presentación
+    # ---------------------------------------------------------
 
     df_tabla["valor_del_contrato"] = (
         df_tabla["valor_del_contrato"]
@@ -1705,6 +2099,10 @@ def actualizar_tabla(
         df_tabla["valor_pendiente_de_pago"]
         .apply(formato_monetario)
     )
+
+    # ---------------------------------------------------------
+    # 6. Entregar los datos a Dash
+    # ---------------------------------------------------------
 
     return df_tabla.to_dict("records")
 
