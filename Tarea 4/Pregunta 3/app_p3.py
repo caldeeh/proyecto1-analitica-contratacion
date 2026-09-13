@@ -1083,9 +1083,18 @@ def actualizar_grafico_ejecucion(
     # --------------------------------------------------------
 
     if nivel_ejecucion and nivel_ejecucion != "Todos":
+
+        equivalencia_nivel = {
+            "0%": "0 %",
+            "1%-49%": "1 % - 49 %",
+            "50%-99%": "50 % - 99 %",
+            ">=100%": "≥ 100 %",
+            "Sin dato": "Sin dato",
+        }
+
         df_filtrado = df_filtrado[
             df_filtrado["nivel_ejecucion_grafico"]
-            == nivel_ejecucion
+            == equivalencia_nivel[nivel_ejecucion]
         ]
 
     # --------------------------------------------------------
@@ -1210,9 +1219,18 @@ def actualizar_grafico_pendientes(
     # --------------------------------------------------------
 
     if nivel_ejecucion and nivel_ejecucion != "Todos":
+
+        equivalencia_nivel = {
+            "0%": "0 %",
+            "1%-49%": "1 % - 49 %",
+            "50%-99%": "50 % - 99 %",
+            ">=100%": "≥ 100 %",
+            "Sin dato": "Sin dato",
+        }
+
         df_filtrado = df_filtrado[
             df_filtrado["nivel_ejecucion_grafico"]
-            == nivel_ejecucion
+            == equivalencia_nivel[nivel_ejecucion]
         ]
 
     # --------------------------------------------------------
@@ -1362,10 +1380,20 @@ def actualizar_grafico_extensiones(
     # --------------------------------------------------------
 
     if nivel_ejecucion and nivel_ejecucion != "Todos":
+
+        equivalencia_nivel = {
+            "0%": "0 %",
+            "1%-49%": "1 % - 49 %",
+            "50%-99%": "50 % - 99 %",
+            ">=100%": "≥ 100 %",
+            "Sin dato": "Sin dato",
+        }
+
         df_filtrado = df_filtrado[
             df_filtrado["nivel_ejecucion_grafico"]
-            == nivel_ejecucion
+            == equivalencia_nivel[nivel_ejecucion]
         ]
+
 
     # --------------------------------------------------------
     # PREPARAR INFORMACIÓN
@@ -1510,9 +1538,18 @@ def actualizar_grafico_ejecucion_pago(
     # --------------------------------------------------------
 
     if nivel_ejecucion and nivel_ejecucion != "Todos":
+
+        equivalencia_nivel = {
+            "0%": "0 %",
+            "1%-49%": "1 % - 49 %",
+            "50%-99%": "50 % - 99 %",
+            ">=100%": "≥ 100 %",
+            "Sin dato": "Sin dato",
+        }
+
         df_filtrado = df_filtrado[
             df_filtrado["nivel_ejecucion_grafico"]
-            == nivel_ejecucion
+            == equivalencia_nivel[nivel_ejecucion]
         ]
 
     # --------------------------------------------------------
@@ -1676,9 +1713,18 @@ def actualizar_prioritarios(
     )
 
     if nivel_ejecucion and nivel_ejecucion != "Todos":
+
+        equivalencia_nivel = {
+            "0%": "0 %",
+            "1%-49%": "1 % - 49 %",
+            "50%-99%": "50 % - 99 %",
+            ">=100%": "≥ 100 %",
+            "Sin dato": "Sin dato",
+        }
+
         df_filtrado = df_filtrado[
             df_filtrado["nivel_ejecucion_grafico"]
-            == nivel_ejecucion
+            == equivalencia_nivel[nivel_ejecucion]
         ]
 
     # --------------------------------------------------------
@@ -1787,9 +1833,18 @@ def actualizar_grafico_prioritarios_tipo(
     )
 
     if nivel_ejecucion and nivel_ejecucion != "Todos":
+
+        equivalencia_nivel = {
+            "0%": "0 %",
+            "1%-49%": "1 % - 49 %",
+            "50%-99%": "50 % - 99 %",
+            ">=100%": "≥ 100 %",
+            "Sin dato": "Sin dato",
+        }
+
         df_filtrado = df_filtrado[
             df_filtrado["nivel_ejecucion_grafico"]
-            == nivel_ejecucion
+            == equivalencia_nivel[nivel_ejecucion]
         ]
 
     # --------------------------------------------------------
@@ -1911,11 +1966,19 @@ def actualizar_grafico_prioritarios_modalidad(
     )
 
     if nivel_ejecucion and nivel_ejecucion != "Todos":
+
+        equivalencia_nivel = {
+            "0%": "0 %",
+            "1%-49%": "1 % - 49 %",
+            "50%-99%": "50 % - 99 %",
+            ">=100%": "≥ 100 %",
+            "Sin dato": "Sin dato",
+        }
+
         df_filtrado = df_filtrado[
             df_filtrado["nivel_ejecucion_grafico"]
-            == nivel_ejecucion
+            == equivalencia_nivel[nivel_ejecucion]
         ]
-
     # --------------------------------------------------------
     # SELECCIONAR PRIORITARIOS
     # --------------------------------------------------------
@@ -1952,7 +2015,7 @@ def actualizar_grafico_prioritarios_modalidad(
     )
 
     figura.update_layout(
-        xaxis_range=[0, resumen.max() * 1.20],
+        xaxis_range=[0, resumen.max() * 1.20 if not resumen.empty else 1],
         title="Contratos prioritarios por modalidad de contratación",
         xaxis_title="Número de contratos",
         yaxis_title="Modalidad de contratación",
