@@ -4,7 +4,19 @@
 
 ### Pregunta 1 — Concentración de la contratación
 
-La evaluación de esta pregunta queda pendiente de incorporación de los resultados del análisis correspondiente. Esta sección será actualizada una vez se complete el análisis de concentración de la contratación del INVIAS.
+**Hallazgo.** El análisis muestra que la contratación de INVIAS no presenta una alta concentración global en un número reducido de proveedores. Sobre los contratos con valor positivo, el proveedor de mayor participación concentra aproximadamente el 4,54 % del valor contratado, mientras que los cinco principales proveedores concentran el 12,79 % y los diez principales el 20,38 %. El índice HHI obtenido fue cercano a 85 puntos en una escala de 0 a 10.000, lo que indica una baja concentración agregada entre los principales proveedores.
+
+Sin embargo, la distribución del valor contratado sí presenta una desigualdad importante a lo largo del conjunto de proveedores. Aproximadamente 216 proveedores, equivalentes a cerca del 2,5 % de los proveedores incluidos en el análisis monetario, acumulan el 80 % del valor contratado. Esto evidencia una estructura caracterizada por una participación relativamente distribuida entre los proveedores principales, pero acompañada de una larga cola de proveedores con participaciones individuales reducidas.
+
+**Análisis.** La concentración también cambia de manera importante según la modalidad y el tipo de contrato. La Contratación Directa representa una proporción elevada del número de contratos, cercana al 68,8 %, pero concentra aproximadamente el 20,1 % del valor. En contraste, la Licitación Pública de Obra Pública representa alrededor del 3,8 % de los contratos y concentra aproximadamente el 56,6 % del valor contratado.
+
+Por tipo de contrato se observa un comportamiento similar. Los contratos de Prestación de Servicios representan aproximadamente el 58,7 % del número de contratos, pero solamente cerca del 3,3 % del valor, mientras que los contratos de Obra corresponden a aproximadamente el 15,4 % de los contratos y concentran alrededor del 66,3 % del valor contratado.
+
+Estos resultados muestran que analizar únicamente el número de contratos puede generar una lectura incompleta de la contratación. La concentración debe evaluarse simultáneamente desde la frecuencia y desde el valor económico.
+
+**Conclusión.** La pregunta de negocio puede responderse identificando dos patrones complementarios. Primero, no existe evidencia descriptiva de una concentración dominante del valor en unos pocos proveedores cuando se utilizan indicadores como CR5, CR10 y HHI. Segundo, existe una distribución desigual del valor contratado, en la que una fracción relativamente pequeña del conjunto total de proveedores acumula una proporción importante de los recursos.
+
+Adicionalmente, la concentración del valor depende fuertemente de la modalidad y del tipo contractual. Estos resultados constituyen señales útiles para orientar actividades de seguimiento y análisis más detallado, pero no deben interpretarse por sí solos como evidencia de irregularidad, favoritismo o comportamiento indebido.
 
 ### Pregunta 2 — Distribución territorial
 
@@ -26,7 +38,23 @@ La evaluación de esta pregunta queda pendiente de incorporación de los resulta
 
 El análisis descriptivo permitió pasar de una revisión general de la base a la identificación de patrones relevantes para las preguntas de negocio. Se utilizaron medidas de tendencia central, percentiles, distribuciones, segmentaciones, análisis temporal y relaciones entre variables, complementadas con visualizaciones.
 
-### 2.1. Pregunta 2 — Distribución territorial
+### 2.1. Pregunta 1 — Concentración de la contratación
+
+El análisis descriptivo mostró que el valor de los contratos presenta una distribución altamente asimétrica. Por esta razón, además de revisar estadísticas generales, el análisis se enfocó en participaciones porcentuales, rankings, concentración acumulada e indicadores específicos como CR1, CR5, CR10 y HHI.
+
+Para el análisis por número de contratos se conservaron 17.477 contratos formalizados. Para los análisis monetarios se utilizaron 17.244 contratos con valor positivo. Esta distinción permite evitar que contratos formalizados con valor igual a cero afecten los cálculos de participación monetaria.
+
+El análisis monetario incluyó aproximadamente 8.640 proveedores. El proveedor con mayor participación concentra cerca del 4,54 % del valor total, los cinco principales el 12,79 % y los diez principales el 20,38 %. El HHI fue aproximadamente 85 puntos en una escala de 0 a 10.000, resultado consistente con una baja concentración global entre los principales proveedores.
+
+Al analizar la distribución acumulada se encontró que aproximadamente 216 proveedores concentran el 80 % del valor contratado. Esto representa cerca del 2,5 % de los proveedores incluidos en el análisis monetario y muestra que, aunque ningún grupo pequeño domina individualmente la contratación, la distribución del valor presenta una fuerte desigualdad entre la parte superior y la larga cola de proveedores.
+
+El análisis por modalidad mostró diferencias importantes entre la participación en número de contratos y la participación en valor. La Contratación Directa representa aproximadamente el 68,8 % de los contratos, pero cerca del 20,1 % del valor contratado. Por su parte, la Licitación Pública de Obra Pública representa alrededor del 3,8 % de los contratos y concentra aproximadamente el 56,6 % del valor.
+
+Por tipo contractual, la Prestación de Servicios concentra cerca del 58,7 % de los contratos pero aproximadamente el 3,3 % del valor, mientras que Obra representa alrededor del 15,4 % de los contratos y aproximadamente el 66,3 % del valor.
+
+Finalmente, el análisis temporal evidenció variaciones en CR5 y CR10 entre años. Para evitar interpretaciones sesgadas por periodos incompletos, la comparación temporal principal se restringió a los años completos entre 2018 y 2025.
+
+### 2.2. Pregunta 2 — Distribución territorial
 
 El análisis mostró que la información territorial no está disponible directamente en los campos estructurados de SECOP II. Como respuesta, se construyó una variable territorial a partir del texto contractual, utilizando normalización, un diccionario de 33 entidades territoriales y reglas para evitar falsos positivos. El tratamiento de topónimos ambiguos permitió corregir 80 asignaciones potencialmente erróneas en 98 contratos identificados con expresiones ambiguas.
 
@@ -36,7 +64,7 @@ Entre los departamentos con mayor valor contratado se encuentran Antioquia (12,8
 
 La principal fortaleza de este análisis es que permite recuperar información territorial que no estaba disponible de manera estructurada. Su principal limitación es que la asignación depende del contenido textual del contrato, por lo que los resultados deben interpretarse como una aproximación territorial y no como un registro oficial del lugar de ejecución.
 
-### 2.2. Pregunta 3 — Ejecución financiera
+### 2.3. Pregunta 3 — Ejecución financiera
 
 El análisis descriptivo evidenció una distribución altamente asimétrica de las variables financieras. La diferencia entre media y mediana muestra que unos pocos contratos con valores elevados pueden afectar significativamente los promedios, por lo que se utilizaron medidas robustas como la mediana y los percentiles.
 
@@ -85,6 +113,7 @@ Las principales limitaciones identificadas durante el proyecto fueron:
 - La distribución financiera presenta valores extremos. En particular, 14 contratos concentran aproximadamente el 99,996 % del valor pendiente de pago reportado, por lo que este indicador debe interpretarse con precaución y no utilizarse directamente para rankings sin una revisión previa.
 - La identificación de contratos prioritarios constituye una regla de seguimiento y no una evidencia de irregularidad o incumplimiento.
 - El proyecto no incorporó modelos predictivos, por lo que el análisis se limita a describir y priorizar situaciones observadas en los datos disponibles.
+- Los indicadores de concentración describen cómo se distribuyen los contratos y los recursos, pero no permiten establecer por sí mismos la existencia de irregularidades, competencia insuficiente o favoritismo. Una evaluación de este tipo requeriría incorporar información adicional sobre los procesos de selección, número de oferentes, condiciones de competencia y características específicas de cada contrato.
 
 Como oportunidades de mejora se plantea fortalecer la calidad y estructura de la información territorial y financiera, incorporar nuevos cortes periódicos de SECOP II y desarrollar posteriormente modelos predictivos sobre variables previamente validadas.
 
