@@ -19,7 +19,7 @@ Despliegue:
 import dash
 from dash import dcc, html
 
-from modulos import ejecucion, territorial
+from modulos import concentracion, ejecucion, territorial
 
 # --------------------------------------------------------------------------
 # Definición de las pestañas
@@ -32,7 +32,7 @@ PREGUNTAS = [
         "responsable": "Jhoiner Javier Ramos Ramírez",
         "descripcion": "En qué proveedores, modalidades y tipos de contrato se "
                        "concentra la contratación del INVIAS.",
-        "contenido": None,
+        "contenido": concentracion.layout,
     },
     {
         "id": "territorial",
@@ -115,7 +115,7 @@ app.layout = html.Div([
     encabezado(),
     html.Div(className="contenedor", children=[
         dcc.Tabs(
-            value="territorial",
+            value="concentracion",
             children=[pestana(p) for p in PREGUNTAS],
         ),
     ]),
