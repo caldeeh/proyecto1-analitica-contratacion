@@ -1,91 +1,205 @@
 # Tarea 6. Despliegue y mantenimiento
 
-**Rol involucrado:** Despliegue y mantenimiento.
+**Rol involucrado:** Despliegue y mantenimiento.  
 **Responsable:** Jhoiner Javier Ramos Ramírez
 
-Esta carpeta es el soporte del despliegue: el procedimiento seguido, la URL del tablero en ejecución y las evidencias que pide el enunciado (**Soporte 5**).
+Esta carpeta contiene el soporte del despliegue del tablero, incluyendo la configuración de la instancia EC2, el procedimiento seguido, la URL pública de acceso y las evidencias solicitadas.
 
-El código del tablero no va aquí. Vive en la carpeta `despliegue/` en la raíz del repositorio, que es la que se clona en la instancia.
+El código del tablero se encuentra en la carpeta `despliegue/` ubicada en la raíz del repositorio.
 
 ---
 
 ## 1. URL del tablero en ejecución
 
-> PENDIENTE — Javier: reemplazar por la URL real.
+El tablero se encuentra desplegado en una instancia de Amazon EC2 y puede consultarse en:
 
+```text
+http://13.219.17.0:8050/
 ```
-http://<IP-PUBLICA-EC2>:8050
-```
+
+---
 
 ## 2. Configuración de la instancia
 
-> PENDIENTE — Javier: completar con los valores reales del despliegue.
-
 | Elemento | Valor |
 |---|---|
-| Región | |
-| Tipo de instancia | |
-| AMI / sistema operativo | |
-| Almacenamiento | |
-| Security group | |
-| Puerto expuesto | 8050 |
-| IP pública | |
+| Proveedor de nube | AWS Academy Learner Lab |
+| Servicio | Amazon EC2 |
+| Nombre de la instancia | `tableroproyecto` |
+| Instance ID | `i-0fc1ed24b69b25996` |
+| Región | `us-east-1` — US East (N. Virginia) |
+| Tipo de instancia | `t3.micro` |
+| AMI / sistema operativo | Amazon Linux 2023 |
+| Plataforma | Linux/UNIX |
+| IP pública / Elastic IP | `13.219.17.0` |
+| IP privada | `172.31.19.220` |
+| Public DNS | `ec2-13-219-17-0.compute-1.amazonaws.com` |
+| Key pair | `tablero` |
+| Puerto del tablero | `8050` |
+
+---
 
 ## 3. Procedimiento de despliegue
 
-Los pasos están probados en local y documentados en `despliegue/README.md`. Este es el resumen de lo que se ejecuta en la instancia:
+### 3.1. Preparación de la instancia
+
+La instancia utilizada corresponde a Amazon Linux 2023.
+
+Se actualizan los paquetes del sistema:
 
 ```bash
-# 1. Dependencias del sistema
-sudo apt update && sudo apt install -y python3-pip git
+sudo yum update -y
+```
 
-# 2. Clonar el repositorio
+En caso de ser necesario, se instalan Python, `pip` y Git:
+
+```bash
+sudo yum install -y python3-pip git
+```
+
+Se verifican las instalaciones:
+
+```bash
+python3 --version
+pip3 --version
+git --version
+```
+
+### 3.2. Clonación del repositorio
+
+Se clona el repositorio del proyecto desde GitHub:
+
+```bash
 git clone https://github.com/caldeeh/proyecto1-analitica-contratacion.git
-cd proyecto1-analitica-contratacion/despliegue
-
-# 3. Dependencias de Python
-pip3 install -r requirements.txt
-
-# 4. Levantar el tablero con gunicorn
-gunicorn --bind 0.0.0.0:8050 --workers 2 app:server
 ```
 
-Para que siga corriendo al cerrar la sesión SSH:
+Posteriormente se ingresa al proyecto:
 
 ```bash
-nohup gunicorn --bind 0.0.0.0:8050 --workers 2 app:server > tablero.log 2>&1 &
+cd proyecto1-analitica-contratacion
 ```
 
-El security group debe permitir tráfico entrante TCP en el puerto 8050.
+### 3.3. Instalación de dependencias
+
+Se instalan las dependencias definidas para el despliegue:
+
+```bash
+pip3 install -r despliegue/requirements.txt
+```
+
+La aplicación integra los tres módulos correspondientes a las preguntas de negocio:
+
+```text
+concentracion.py
+territorial.py
+ejecucion.py
+```
+
+### 3.4. Ejecución del tablero
+
+Se ingresa a la carpeta de despliegue:
+
+```bash
+cd despliegue
+```
+
+El tablero puede ejecutarse mediante Gunicorn:
+
+```bash
+gunicorn --bind 0.0.0.0:8050 app:server
+```
+
+Para mantenerlo ejecutándose después de cerrar la sesión SSH:
+
+```bash
+nohup gunicorn --bind 0.0.0.0:8050 app:server > tablero.log 2>&1 &
+```
+
+El Security Group de la instancia debe permitir tráfico entrante TCP por el puerto `8050`.
+
+---
 
 ## 4. Verificación
 
-Antes de dar el despliegue por terminado:
+Para verificar que Gunicorn se encuentre activo:
 
-- [ ] El tablero abre desde un navegador fuera de la instancia, con la IP pública.
-- [ ] Las tres pestañas cargan (Pregunta 1, Pregunta 2, Pregunta 3).
-- [ ] Los filtros de cada pestaña responden y los gráficos se actualizan.
-- [ ] El mapa de la Pregunta 2 se dibuja. Si aparece en blanco, es que está intentando descargar geometría de internet: se usa `Choroplethmapbox` con fondo plano justamente para evitarlo.
-- [ ] El proceso sobrevive al cierre de la sesión SSH.
-- [ ] La URL sigue respondiendo al día siguiente.
+```bash
+ps aux | grep gunicorn
+```
+
+También se puede comprobar la respuesta de la aplicación directamente desde la instancia:
+
+```bash
+curl -I http://127.0.0.1:8050
+```
+
+Una respuesta correcta debe incluir:
+
+```text
+HTTP/1.1 200 OK
+```
+
+El tablero debe poder abrirse desde un navegador externo mediante:
+
+```text
+http://13.219.17.0:8050/
+```
+
+Antes de dar por finalizado el despliegue se verifica:
+
+- [x] La instancia EC2 se encuentra en estado `Running`.
+- [x] La instancia cuenta con una IP pública asociada.
+- [x] El tablero es accesible mediante la IP pública y el puerto `8050`.
+- [ ] Las tres pestañas del tablero cargan correctamente.
+- [ ] Los filtros de cada pestaña responden.
+- [ ] Las visualizaciones se actualizan correctamente.
+- [ ] El proceso continúa funcionando después de cerrar la sesión SSH.
+
+---
 
 ## 5. Mantenimiento
 
-Para publicar cambios en el tablero:
+Para actualizar el tablero después de realizar cambios en el repositorio:
 
 ```bash
 cd ~/proyecto1-analitica-contratacion
-git pull
-cd despliegue
-# si cambiaron los datos base
-python3 preparar_datos.py
-# reiniciar
-pkill gunicorn
-nohup gunicorn --bind 0.0.0.0:8050 --workers 2 app:server > tablero.log 2>&1 &
+git pull origin main
 ```
 
-Si el tablero deja de responder, `tablero.log` tiene la traza del error.
+Si se modificaron las dependencias:
+
+```bash
+pip3 install -r despliegue/requirements.txt
+```
+
+Posteriormente se reinicia Gunicorn:
+
+```bash
+pkill -f gunicorn
+cd despliegue
+nohup gunicorn --bind 0.0.0.0:8050 app:server > tablero.log 2>&1 &
+```
+
+Para revisar posibles errores:
+
+```bash
+tail -n 50 tablero.log
+```
+
+---
 
 ## 6. Evidencias
 
-Las capturas van en la subcarpeta `capturas/`. Ver el archivo `capturas/README.md` para la lista de las que pide el enunciado.
+Las capturas correspondientes al despliegue deben almacenarse en la subcarpeta `capturas/`.
+
+Se recomienda incluir:
+
+1. Instancia EC2 `tableroproyecto` en estado **Running**.
+2. Región `us-east-1` — N. Virginia.
+3. Tipo de instancia `t3.micro`.
+4. IP pública / Elastic IP `13.219.17.0`.
+5. Configuración del Security Group y puerto `8050`.
+6. Terminal con Gunicorn en ejecución.
+7. Respuesta `HTTP/1.1 200 OK`.
+8. Tablero abierto desde `http://13.219.17.0:8050/`.
+9. Evidencia de las tres pestañas del tablero.
