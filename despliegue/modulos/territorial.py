@@ -24,6 +24,17 @@ from dash import Input, Output, callback, dcc, html
 
 DATOS = Path(__file__).resolve().parent.parent / "data"
 
+# Plotly 6 eliminó los tipos de traza «mapbox» y los reemplazó por «map», que
+# usa MapLibre. El tablero debe funcionar con las dos versiones: la instancia
+# de EC2 tiene la 5.22 que fija requirements.txt, pero un equipo con la 6
+# instalada fallaba con AttributeError al dibujar el mapa.
+if hasattr(go, "Choroplethmap"):          # plotly >= 6
+    TRAZA_MAPA = go.Choroplethmap
+    CLAVE_MAPA = "map"
+else:                                     # plotly 5.x
+    TRAZA_MAPA = go.Choroplethmapbox
+    CLAVE_MAPA = "mapbox"
+
 # Paleta validada para daltonismo; los colores se usan siempre en este orden.
 AZUL = "#2a78d6"
 NARANJA = "#eb6834"
@@ -266,11 +277,11 @@ def actualizar_mapa(anios, tipos, modalidades, sin_fecha):
     if deptos.empty:
         return _figura_vacia()
 
-    # Se usa Choroplethmapbox con estilo "white-bg" y sin capas de teselas: el
+    # Se usa la traza de mapa con estilo "white-bg" y sin capas de teselas: el
     # mapa se dibuja solo con el geojson local. Choropleth (el de proyección
     # geográfica) descarga un topojson de cdn.plot.ly al renderizar, y eso
     # rompería el mapa en una instancia de EC2 sin salida a internet.
-    figura = go.Figure(go.Choroplethmapbox(
+    figura = go.Figure(TRAZA_MAPA(
         geojson=GEOJSON,
         locations=deptos["nombre_geojson"],
         z=deptos["valor"] / 1e9,
@@ -287,7 +298,8 @@ def actualizar_mapa(anios, tipos, modalidades, sin_fecha):
     ))
     figura.update_layout(
         **DISENO_BASE,
-        mapbox=dict(style="white-bg", center=dict(lat=4.3, lon=-73.5), zoom=3.9),
+        **{CLAVE_MAPA: dict(style="white-bg",
+                            center=dict(lat=4.3, lon=-73.5), zoom=3.9)},
     )
     return figura
 
